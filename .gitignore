@@ -6,3 +6,6 @@
 .env.development
 .env.test
 .env.production
+
+# Cursor hook debug artifacts
+.cursor/hooks/.last-*.json
