@@ -76,15 +76,16 @@ function onHandlePointerDown(e: PointerEvent, paramId: string, side: 'in' | 'out
           :class="selected ? 'bg-white/5' : 'bg-white/0'"
           :style="{ height: PARAM_ROW_H + 'px', marginTop: idx === 0 ? '0px' : '6px' }"
         >
-          <!-- IN (set) -->
+          <!-- IN (set) - objects always, actions only if receiver -->
           <button
+            v-if="node.type === 'object' || p.io !== 'out'"
             data-handle
             class="absolute -left-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border border-white/15 bg-zinc-950 hover:border-fuchsia-300/60"
             :data-node-id="node.id"
             :data-param-id="p.id"
             data-side="in"
             type="button"
-            title="set"
+            :title="node.type === 'action' ? 'receiver (set)' : 'set'"
             @pointerdown="onHandlePointerDown($event, p.id, 'in', 'set')"
           >
             <span class="sr-only">set</span>
@@ -92,15 +93,16 @@ function onHandlePointerDown(e: PointerEvent, paramId: string, side: 'in' | 'out
 
           <div class="truncate text-white/75">{{ p.name }}</div>
 
-          <!-- OUT (get) -->
+          <!-- OUT (get) - objects always, actions only if sender -->
           <button
+            v-if="node.type === 'object' || p.io === 'out'"
             data-handle
             class="absolute -right-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border border-white/15 bg-zinc-950 hover:border-cyan-200/70"
             :data-node-id="node.id"
             :data-param-id="p.id"
             data-side="out"
             type="button"
-            title="get"
+            :title="node.type === 'action' ? 'sender (get)' : 'get'"
             @pointerdown="onHandlePointerDown($event, p.id, 'out', 'get')"
           >
             <span class="sr-only">get</span>

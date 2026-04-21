@@ -1,8 +1,16 @@
 export type NodeType = 'object' | 'action'
 
+export type ParamIO = 'in' | 'out'
+
 export type Param = {
   id: string
   name: string
+  /**
+   * Only meaningful for action parameters:
+   * - in: receiver (set)
+   * - out: sender (get)
+   */
+  io?: ParamIO
 }
 
 export type EditorNode = {

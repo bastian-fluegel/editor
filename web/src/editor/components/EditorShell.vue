@@ -41,6 +41,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
         :state="editor.state"
         :nodes-by-id="editor.nodesById"
         @select-node="editor.selectNode"
+        @select-link="editor.selectLink"
         @begin-node-drag="editor.beginNodeDrag"
         @set-node-position="editor.setNodePosition"
         @begin-link-drag="editor.beginLinkDrag"
@@ -51,7 +52,7 @@ onBeforeUnmount(() => window.removeEventListener('keydown', onKeyDown))
       />
 
       <SidebarPanel
-        class="w-[360px] shrink-0 border-l border-white/10 bg-zinc-950/50"
+        class="shrink-0 border-l border-white/10 bg-zinc-950/50 min-w-[280px] max-w-[520px] w-[360px] resize-x overflow-auto"
         :node="editor.selectedNode.value"
         @set-name="editor.setNodeName"
         @set-code="editor.setNodeCode"

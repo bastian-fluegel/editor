@@ -70,12 +70,32 @@ const emit = defineEmits<{
               :key="p.id"
               class="flex items-center gap-2 rounded-md border border-white/10 bg-zinc-950/20 px-2 py-1.5"
             >
+              <select
+                v-if="node.type === 'action'"
+                class="rounded border border-white/10 bg-zinc-950/40 px-2 py-1 text-[11px] text-white/70 outline-none focus:border-cyan-300/40"
+                :value="p.io ?? 'in'"
+                @change="
+                  emit('upsert-param', node.id, {
+                    id: p.id,
+                    name: p.name,
+                    io: (($event.target as HTMLSelectElement).value as 'in' | 'out'),
+                  })
+                "
+                title="sender/receiver"
+              >
+                <option value="in">Empfänger</option>
+                <option value="out">Sender</option>
+              </select>
               <input
                 class="min-w-0 flex-1 rounded border border-white/10 bg-zinc-950/40 px-2 py-1 text-xs text-white/85 outline-none focus:border-cyan-300/40"
                 :value="p.name"
                 type="text"
                 @input="
-                  emit('upsert-param', node.id, { id: p.id, name: ($event.target as HTMLInputElement).value })
+                  emit('upsert-param', node.id, {
+                    id: p.id,
+                    name: ($event.target as HTMLInputElement).value,
+                    io: p.io,
+                  })
                 "
               />
               <button

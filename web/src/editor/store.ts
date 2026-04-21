@@ -6,6 +6,7 @@ type EditorState = {
   nodes: EditorNode[]
   links: Link[]
   selectedNodeId: string | null
+  selectedLinkId: string | null
   drag: DragState
   status: string
 }
@@ -22,6 +23,7 @@ export function useEditorStore() {
     nodes: [],
     links: [],
     selectedNodeId: null,
+    selectedLinkId: null,
     drag: { kind: 'none' },
     status: 'Ready',
   })
@@ -35,6 +37,12 @@ export function useEditorStore() {
 
   function selectNode(nodeId: string | null) {
     state.selectedNodeId = nodeId
+    if (nodeId) state.selectedLinkId = null
+  }
+
+  function selectLink(linkId: string | null) {
+    state.selectedLinkId = linkId
+    if (linkId) state.selectedNodeId = null
   }
 
   function addNode(type: NodeType) {
@@ -54,12 +62,20 @@ export function useEditorStore() {
   }
 
   function deleteSelected() {
-    const id = state.selectedNodeId
-    if (!id) return
-    state.nodes = state.nodes.filter((n) => n.id !== id)
-    state.links = state.links.filter((l) => l.from.nodeId !== id && l.to.nodeId !== id)
-    state.selectedNodeId = null
-    state.status = 'Deleted node'
+    if (state.selectedNodeId) {
+      const id = state.selectedNodeId
+      state.nodes = state.nodes.filter((n) => n.id !== id)
+      state.links = state.links.filter((l) => l.from.nodeId !== id && l.to.nodeId !== id)
+      state.selectedNodeId = null
+      state.status = 'Deleted node'
+      return
+    }
+    if (state.selectedLinkId) {
+      const id = state.selectedLinkId
+      state.links = state.links.filter((l) => l.id !== id)
+      state.selectedLinkId = null
+      state.status = 'Deleted link'
+    }
   }
 
   function upsertParam(nodeId: string, param: Param) {
@@ -73,7 +89,11 @@ export function useEditorStore() {
   function addParam(nodeId: string) {
     const node = nodesById.value.get(nodeId)
     if (!node) return
-    node.params.push({ id: newId('param'), name: `param_${node.params.length + 1}` })
+    node.params.push({
+      id: newId('param'),
+      name: `param_${node.params.length + 1}`,
+      io: node.type === 'action' ? 'in' : undefined,
+    })
     state.status = 'Added param'
   }
 
@@ -150,10 +170,12 @@ export function useEditorStore() {
       to,
     })
     state.status = `Linked (${kind})`
+    selectLink(state.links[state.links.length - 1]?.id ?? null)
   }
 
   function deleteLink(linkId: string) {
     state.links = state.links.filter((l) => l.id !== linkId)
+    if (state.selectedLinkId === linkId) state.selectedLinkId = null
     state.status = 'Deleted link'
   }
 
@@ -163,6 +185,7 @@ export function useEditorStore() {
     linksById,
     selectedNode,
     selectNode,
+    selectLink,
     addNode,
     deleteSelected,
     addParam,

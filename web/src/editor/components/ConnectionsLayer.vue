@@ -8,9 +8,11 @@ const props = defineProps<{
   nodesById: ComputedRef<Map<string, EditorNode>>
   links: Link[]
   drag: DragState
+  selectedLinkId: string | null
 }>()
 
 const emit = defineEmits<{
+  (e: 'select-link', linkId: string | null): void
   (e: 'delete-link', linkId: string): void
 }>()
 
@@ -37,7 +39,7 @@ const preview = computed(() => {
 </script>
 
 <template>
-  <svg class="absolute inset-0 pointer-events-none" aria-hidden="true">
+  <svg class="absolute inset-0" aria-hidden="true">
     <defs>
       <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
         <feGaussianBlur stdDeviation="2.6" result="coloredBlur" />
@@ -49,18 +51,33 @@ const preview = computed(() => {
     </defs>
 
     <g>
-      <path
-        v-for="p in paths"
-        :key="p.id"
-        :d="p.d"
-        :stroke="p.color"
-        stroke-width="2.5"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        opacity="0.9"
-        filter="url(#glow)"
-      />
+      <g v-for="p in paths" :key="p.id">
+        <!-- Hit area -->
+        <path
+          :d="p.d"
+          stroke="transparent"
+          stroke-width="14"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="cursor-pointer"
+          @pointerdown.stop="emit('select-link', p.id)"
+          @dblclick.stop="emit('delete-link', p.id)"
+        />
+
+        <!-- Visible link -->
+        <path
+          :d="p.d"
+          :stroke="p.color"
+          :stroke-width="p.id === selectedLinkId ? 3.5 : 2.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          :opacity="p.id === selectedLinkId ? 1 : 0.9"
+          filter="url(#glow)"
+          class="pointer-events-none"
+        />
+      </g>
 
       <path
         v-if="preview"
@@ -72,20 +89,9 @@ const preview = computed(() => {
         stroke-linejoin="round"
         opacity="0.55"
         stroke-dasharray="6 6"
+        class="pointer-events-none"
       />
     </g>
   </svg>
-
-  <!-- Click-capture layer for deleting links (very minimal) -->
-  <div class="absolute inset-0">
-    <button
-      v-for="p in paths"
-      :key="p.id + '_btn'"
-      class="absolute pointer-events-auto"
-      type="button"
-      :style="{ left: '-9999px', top: '-9999px' }"
-      @click="emit('delete-link', p.id)"
-    />
-  </div>
 </template>
 
