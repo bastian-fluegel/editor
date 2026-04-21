@@ -4,7 +4,6 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project adheres to Semantic Versioning.
 
-
 ## [Unreleased]
 
 ### Added
@@ -12,24 +11,11 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Changed
 
 ### Fixed
-
 
 ## [0.1.1] - 2026-04-21
 
-
-### Added
-
 ### Changed
-
-### Fixed
-
-## [Unreleased]
-
-### Added
-
-### Changed
-
-### Fixed
+- Release v0.1.1.
 
 ## [0.1.0] - 2026-04-21
 
