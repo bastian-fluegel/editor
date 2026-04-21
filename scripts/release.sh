@@ -118,7 +118,7 @@ def is_unreleased_heading(l: str) -> bool:
     return l.startswith("## [Unreleased]")
 
 def is_version_heading(l: str) -> bool:
-    return bool(re.match(r"^## \\[[0-9]+\\.[0-9]+\\.[0-9]+\\]", l))
+    return bool(re.match(r"^## \[[0-9]+\.[0-9]+\.[0-9]+\]", l))
 
 u_start = next(i for i,l in enumerate(lines) if is_unreleased_heading(l))
 u_end = next((i for i in range(u_start+1, len(lines)) if is_version_heading(lines[i])), len(lines))
