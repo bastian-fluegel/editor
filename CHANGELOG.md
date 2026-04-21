@@ -8,6 +8,7 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ## [Unreleased]
 
 ### Added
+- Web-based editor UI (Vue 3 + Tailwind) with menu/toolbar/statusbar layout, draggable object/action nodes, editable properties sidebar, and orthogonal (Manhattan) parameter links.
 
 ### Changed
 
