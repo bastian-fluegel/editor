@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "command": ".cursor/hooks/release-pretooluse.sh",
+        "matcher": "Shell",
+        "failClosed": true,
+        "timeout": 20
+      }
+    ]
+  }
+}
