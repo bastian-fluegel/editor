@@ -9,13 +9,6 @@ import json, os, re, sys
 
 raw = os.environ.get("CURSOR_HOOK_PAYLOAD", "")
 try:
-    os.makedirs(".cursor/hooks", exist_ok=True)
-    with open(".cursor/hooks/.last-pretooluse.json", "w", encoding="utf-8") as f:
-        f.write(raw)
-except Exception:
-    pass
-
-try:
     data = json.loads(raw) if raw.strip() else {}
 except Exception:
     # Fail closed: malformed input
