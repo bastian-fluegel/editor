@@ -1,0 +1,23 @@
+---
+description: Saubere Dokumentation + gepflegter CHANGELOG
+alwaysApply: true
+---
+
+# Dokumentation & CHANGELOG
+
+- **Dokumentation ist Pflicht** für:
+  - public APIs, Module, Services, CLI-Commands, Configs, non-obvious Entscheidungen
+  - Fehlerfälle/Edge-Cases und Retries/Timeouts
+- **Kein Kommentar-Narrativ**: Kommentare nur für *Warum/Trade-offs*, nicht „was der Code tut“.
+- **README/Docs aktualisieren**, wenn Verhalten/Setup/Env/Endpoints sich ändern.
+
+## CHANGELOG-Regeln
+
+- `CHANGELOG.md` wird **bei jeder User-Änderung** gepflegt (nicht für reine Refactors ohne externen Effekt).
+- Format: **Keep a Changelog**, Kategorien: `Added`, `Changed`, `Fixed`, `Removed`, `Security`.
+- Einträge sind **kurz und nutzerorientiert** (was ändert sich für Nutzer/Integrationen?).
+
+## Release-Notiz Minimalformat
+
+- 1–5 Bullet Points.
+- Nenne Breaking Changes explizit.

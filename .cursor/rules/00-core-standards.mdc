@@ -1,0 +1,20 @@
+---
+description: Kompakt, sauber, ohne unnötige Boilerplate
+alwaysApply: true
+---
+
+# Core Standards (immer)
+
+- **Kompakt & übersichtlich**: kurze Funktionen, kleine Module, klare Namen.
+- **Kein unnötiger Boilerplate**: keine „Framework-Rituale“ ohne Nutzen.
+- **Keine verschachtelten Monster**:
+  - early returns statt tiefem `if/else`
+  - guard clauses statt „Pyramiden“
+  - `switch`/lookup-tables statt lange `if-else`-Ketten
+- **Explizite Schnittstellen**: Inputs validieren, Outputs klar typisieren/strukturieren.
+- **Keine stummen Fehler**: nie leere `catch {}` / „ignore“-Muster.
+
+## Wenn unklar
+
+- Liefere zuerst die **kleinste** saubere Lösung, die das Problem wirklich löst.
+- Wenn es mehrere Wege gibt: wähle den **einfachsten** und dokumentiere kurz die Trade-offs im PR/Commit-Text (nicht als narrativen Kommentar im Code).

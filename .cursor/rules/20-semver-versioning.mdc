@@ -1,0 +1,22 @@
+---
+description: SemVer (major.minor.patch) + Release-Workflow
+alwaysApply: true
+---
+
+# SemVer & Versionierung (major.minor.patch)
+
+- Version wird zentral in `VERSION` geführt (eine Zeile, z.B. `1.4.2`).
+- Jede Änderung wird einer Kategorie zugeordnet:
+  - **PATCH**: Bugfix, interne Optimierung ohne API-/Verhaltensänderung
+  - **MINOR**: neue Features, rückwärtskompatibel
+  - **MAJOR**: Breaking Change (API, Verhalten, Konfiguration, Daten)
+- **Breaking Changes** müssen im `CHANGELOG.md` klar markiert sein.
+
+## Commits & Push (Sicherheitsregel)
+
+- Ich kann **Commits/Releases vorbereiten und ausführen**, aber **Git-Commit/Push nur auf explizite User-Anweisung** (z.B. „release patch“ / „commit & push“).
+- Wenn du „release patch/minor/major“ sagst, führe ich aus:
+  - `VERSION` bump
+  - `CHANGELOG.md` ergänzen
+  - Commit (mit klarer Message)
+  - optional Tag + Push (falls gewünscht/erlaubt)

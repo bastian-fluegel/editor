@@ -1,0 +1,18 @@
+---
+description: Saubere Fehlerbehandlung ohne try/catch-Wüsten
+alwaysApply: true
+---
+
+# Fehlerbehandlung (kompakt, robust)
+
+- **Guard clauses zuerst**: Inputs/Preconditions früh prüfen, früh zurück.
+- **Fehler kontextualisieren**: Fehler bekommen Message + Kontext (ids, params), aber keine Secrets.
+- **Keine langen try/catch-Ketten**:
+  - try/catch nur um den *kleinsten* riskanten Block
+  - Fehler möglichst **einmal** fangen (an Layer-Grenzen), nicht überall
+- **Keine tiefen if/else**: nutze frühzeitige Returns, kleine Helper, oder Map/Strategy.
+
+## Pattern (sprachneutral)
+
+- **Result/Outcome statt Exceptions überall**: bei erwartbaren Fehlern lieber `Result<T, E>`/`Either`-Pattern (oder äquivalent) statt Exceptions als Kontrollfluss.
+- **Eigene Fehler-Typen**: wenige, klare Fehlerklassen/-codes statt beliebiger Strings.
