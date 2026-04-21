@@ -126,6 +126,8 @@ const boundsHint = computed(() => ({
               :links="state.links"
               :drag="state.drag"
               :selected-link-id="state.selectedLinkId"
+              :width="boundsHint.w"
+              :height="boundsHint.h"
               @select-link="emit('select-link', $event)"
               @delete-link="emit('delete-link', $event)"
             />

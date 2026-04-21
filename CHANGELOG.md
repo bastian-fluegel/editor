@@ -10,8 +10,11 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ## [Unreleased]
 
 ### Added
+- Web-based editor UI (Vue 3 + Tailwind) with menu/toolbar/statusbar layout, draggable object/action nodes, editable properties sidebar, and orthogonal (Manhattan) parameter links.
 
 ### Changed
+- Default Python stub for Action nodes now reflects the “function with inputs/outputs” model (not a literal placeholder snippet).
+- Action code stub now auto-updates function signature + return dict based on Action parameter direction (receiver=in, sender=out) while preserving the body block.
 
 ### Fixed
 
@@ -29,16 +32,6 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 ### Changed
 
 ### Fixed
-
-## [Unreleased]
-
-### Added
-- Web-based editor UI (Vue 3 + Tailwind) with menu/toolbar/statusbar layout, draggable object/action nodes, editable properties sidebar, and orthogonal (Manhattan) parameter links.
-
-### Changed
-
-### Fixed
-
 
 ## [0.1.2] - 2026-04-21
 

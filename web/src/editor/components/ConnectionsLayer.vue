@@ -9,6 +9,8 @@ const props = defineProps<{
   links: Link[]
   drag: DragState
   selectedLinkId: string | null
+  width: number
+  height: number
 }>()
 
 const emit = defineEmits<{
@@ -39,7 +41,14 @@ const preview = computed(() => {
 </script>
 
 <template>
-  <svg class="absolute inset-0" aria-hidden="true">
+  <svg
+    class="absolute inset-0"
+    :width="width"
+    :height="height"
+    :viewBox="`0 0 ${width} ${height}`"
+    preserveAspectRatio="none"
+    aria-hidden="true"
+  >
     <defs>
       <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
         <feGaussianBlur stdDeviation="2.6" result="coloredBlur" />

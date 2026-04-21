@@ -5,7 +5,8 @@ export const NODE_HEADER_H = 38
 export const NODE_PADDING_Y = 10
 export const PARAM_ROW_H = 28
 export const HANDLE_R = 5
-export const HANDLE_PAD_X = 10
+// Must match handle center offset used in NodeCard (-left/-right with 24px handle).
+export const HANDLE_PAD_X = 12
 
 export type Point = { x: number; y: number }
 

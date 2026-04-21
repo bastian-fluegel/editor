@@ -80,7 +80,7 @@ function onHandlePointerDown(e: PointerEvent, paramId: string, side: 'in' | 'out
           <button
             v-if="node.type === 'object' || p.io !== 'out'"
             data-handle
-            class="absolute -left-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border border-white/15 bg-zinc-950 hover:border-fuchsia-300/60"
+            class="absolute -left-3 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full border border-white/15 bg-zinc-950/90 hover:border-fuchsia-300/70 shadow-[0_0_0_3px_rgba(217,70,239,0.10)]"
             :data-node-id="node.id"
             :data-param-id="p.id"
             data-side="in"
@@ -89,6 +89,7 @@ function onHandlePointerDown(e: PointerEvent, paramId: string, side: 'in' | 'out
             @pointerdown="onHandlePointerDown($event, p.id, 'in', 'set')"
           >
             <span class="sr-only">set</span>
+            <span class="absolute inset-0 m-auto h-2.5 w-2.5 rounded-full bg-fuchsia-400/80" />
           </button>
 
           <div class="truncate text-white/75">{{ p.name }}</div>
@@ -97,7 +98,7 @@ function onHandlePointerDown(e: PointerEvent, paramId: string, side: 'in' | 'out
           <button
             v-if="node.type === 'object' || p.io === 'out'"
             data-handle
-            class="absolute -right-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border border-white/15 bg-zinc-950 hover:border-cyan-200/70"
+            class="absolute -right-3 top-1/2 -translate-y-1/2 h-6 w-6 rounded-full border border-white/15 bg-zinc-950/90 hover:border-cyan-200/80 shadow-[0_0_0_3px_rgba(34,211,238,0.10)]"
             :data-node-id="node.id"
             :data-param-id="p.id"
             data-side="out"
@@ -106,6 +107,7 @@ function onHandlePointerDown(e: PointerEvent, paramId: string, side: 'in' | 'out
             @pointerdown="onHandlePointerDown($event, p.id, 'out', 'get')"
           >
             <span class="sr-only">get</span>
+            <span class="absolute inset-0 m-auto h-2.5 w-2.5 rounded-full bg-cyan-300/80" />
           </button>
         </div>
       </div>
